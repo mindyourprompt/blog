@@ -17,22 +17,22 @@ layout: base.njk
         <span aria-hidden="true"> · </span>
         <span>By {{ author }}</span>
       {% endif %}
+      {% if tags and tags.length %}
+        <span aria-hidden="true"> · </span>
+        <div class="tags">
+          {% for tag in tags %}
+            {% if tag != "post" %}
+            <a href="/tags/{{ tag | slugify }}/" class="tag">{{ tag }}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
     
     {% if description %}
     <p class="article-description" style="font-size: 1.2em; color: var(--text-muted); margin: var(--space-lg) 0;">
       {{ description }}
     </p>
-    {% endif %}
-    
-    {% if tags and tags.length %}
-    <div class="tags">
-      {% for tag in tags %}
-        {% if tag != "post" %}
-        <a href="/tags/{{ tag | slug }}/" class="tag">{{ tag }}</a>
-        {% endif %}
-      {% endfor %}
-    </div>
     {% endif %}
   </header>
 
