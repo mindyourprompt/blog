@@ -1,0 +1,114 @@
+---
+layout: base.njk
+pagination:
+  data: collections.tagList
+  size: 1
+  alias: tag
+permalink: /tags/{{ tag | slugify }}/
+eleventyComputed:
+  title: "Articles tagged '{{ tag }}'"
+  description: "Browse all articles tagged with {{ tag }} - expert insights on prompt engineering and AI communication strategies."
+---
+
+<div style="max-width: var(--content-width); margin: 0 auto;">
+  <!-- Page Header -->
+  <header style="margin-bottom: var(--space-3xl); text-align: center;">
+    <h1>Articles tagged "{{ tag }}"</h1>
+    <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 60ch; margin: var(--space-lg) auto 0;">
+      Explore all articles related to {{ tag }} and deepen your understanding of this topic.
+    </p>
+    <div style="margin-top: var(--space-lg);">
+      <a href="/articles/" style="color: var(--accent-fill); text-decoration: none; font-weight: 500;">← Back to All Articles</a>
+    </div>
+  </header>
+
+  <!-- Articles List -->
+  <section>
+    {% set hasTaggedPosts = false %}
+    {% for post in collections.posts %}
+      {% if post.data.tags and tag in post.data.tags %}
+        {% set hasTaggedPosts = true %}
+      {% endif %}
+    {% endfor %}
+    
+    {% if hasTaggedPosts %}
+    <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
+      {% for post in collections.posts %}
+        {% if post.data.tags and tag in post.data.tags %}
+      <article style="display: flex; align-items: flex-start; gap: var(--space-lg); padding: var(--space-lg); background-color: var(--surface); border-radius: 8px; border-left: 4px solid var(--accent-fill);">
+        
+        <!-- Content Section -->
+        <div style="flex: 1;">
+          <h2 style="margin: 0 0 var(--space-sm) 0; font-size: 1.5rem; line-height: 1.3;">
+            <a href="{{ post.url }}" style="text-decoration: none; color: var(--h2-color); display: block;">
+              {{ post.data.title }}
+            </a>
+          </h2>
+          
+          <!-- Meta Information -->
+          <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-md); font-size: 0.9rem; color: var(--text-muted);">
+            <time>{{ post.date | dateFormat }}</time>
+            <span aria-hidden="true">·</span>
+            <span>{{ post.templateContent | readTime }}</span>
+            {% if post.data.author %}
+            <span aria-hidden="true">·</span>
+            <span>By {{ post.data.author }}</span>
+            {% endif %}
+          </div>
+          
+          <!-- Description -->
+          {% if post.data.description %}
+          <p style="margin: 0 0 var(--space-md) 0; color: var(--text-muted); line-height: 1.6;">
+            {{ post.data.description }}
+          </p>
+          {% endif %}
+          
+          <!-- Tags -->
+          {% if post.data.tags and post.data.tags.length > 1 %}
+          <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-bottom: var(--space-md);">
+            {% for postTag in post.data.tags %}
+              {% if postTag != "post" %}
+              <span style="padding: var(--space-xs) var(--space-sm); background-color: {{ 'var(--accent-fill)' if postTag == tag else 'var(--page-bg)' }}; color: {{ 'var(--primary-contrast)' if postTag == tag else 'var(--text-muted)' }}; border-radius: 4px; font-size: 0.8rem; font-weight: 500;">
+                <a href="/tags/{{ postTag | slugify }}/" style="text-decoration: none; color: inherit;">{{ postTag }}</a>
+              </span>
+              {% endif %}
+            {% endfor %}
+          </div>
+          {% endif %}
+          
+          <!-- Read More Button -->
+          <a href="{{ post.url }}" class="btn btn-outline" style="font-size: 0.9rem; display: inline-block;">
+            Read Article
+          </a>
+        </div>
+      </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: var(--space-2xl); background-color: var(--surface); border-radius: 12px;">
+      <h3>No Articles Found</h3>
+      <p style="color: var(--text-muted); margin-bottom: var(--space-lg);">
+        No articles are currently tagged with "{{ tag }}". 
+      </p>
+      <a href="/articles/" class="btn btn-accent">Browse All Articles</a>
+    </div>
+    {% endif %}
+  </section>
+
+  <!-- Related Tags -->
+  {% if collections.tagList.length > 1 %}
+  <section style="margin-top: var(--space-3xl); background-color: var(--surface); padding: var(--space-xl); border-radius: 12px;">
+    <h3 style="margin-top: 0; text-align: center;">Explore Other Topics</h3>
+    <div style="display: flex; flex-wrap: wrap; gap: var(--space-md); justify-content: center; margin-top: var(--space-lg);">
+      {% for otherTag in collections.tagList %}
+        {% if otherTag != tag %}
+        <a href="/tags/{{ otherTag | slugify }}/" style="padding: var(--space-sm) var(--space-lg); background-color: var(--page-bg); color: var(--text); border-radius: 6px; text-decoration: none; font-weight: 500; transition: all 0.2s ease; border: 1px solid var(--border);">
+          {{ otherTag }}
+        </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</div>

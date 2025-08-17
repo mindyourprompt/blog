@@ -50,7 +50,7 @@ permalink: /articles/
       <div class="tags" style="margin-bottom: var(--space-lg);">
         {% for tag in featuredPost.data.tags %}
           {% if tag != "post" %}
-          <span class="tag">{{ tag }}</span>
+          <a href="/tags/{{ tag | slugify }}/" class="tag" style="text-decoration: none;">{{ tag }}</a>
           {% endif %}
         {% endfor %}
       </div>
@@ -94,7 +94,7 @@ permalink: /articles/
           <div class="tags" style="margin-bottom: var(--space-lg);">
             {% for tag in post.data.tags %}
               {% if tag != "post" %}
-              <span class="tag">{{ tag }}</span>
+              <a href="/tags/{{ tag | slugify }}/" class="tag" style="text-decoration: none;">{{ tag }}</a>
               {% endif %}
             {% endfor %}
           </div>

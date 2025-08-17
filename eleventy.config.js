@@ -18,6 +18,19 @@ export default async function(eleventyConfig) {
       .slice(0, 3);
   });
 
+  // Create individual collections for each tag (excluding 'post')
+  eleventyConfig.addCollection("tagList", collection => {
+    const tagSet = new Set();
+    collection.getAll().forEach(item => {
+      (item.data.tags || []).forEach(tag => {
+        if (tag && tag !== "post") {
+          tagSet.add(tag);
+        }
+      });
+    });
+    return [...tagSet].sort();
+  });
+
   // Syntax highlighting plugin
   const syntaxHighlight = await import("@11ty/eleventy-plugin-syntaxhighlight").then(m => m.default);
   eleventyConfig.addPlugin(syntaxHighlight, {
