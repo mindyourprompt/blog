@@ -98,6 +98,8 @@ export default async function(eleventyConfig) {
     },
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
-    templateFormats: ["njk", "md", "html"]
+    templateFormats: ["njk", "md", "html"],
+    // For GitHub Pages: use /blog/ path for github.io, root path for custom domain
+    pathPrefix: process.env.ELEVENTY_PATH_PREFIX || "/"
   };
 }
