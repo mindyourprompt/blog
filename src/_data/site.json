@@ -1,0 +1,27 @@
+{
+  "name": "Mind Your Prompt",
+  "tagline": "Master the Art of AI Communication",
+  "description": "Transform prompt engineering from trial-and-error practice into a structured, engaging learning journey with immediate value and clear skill progression.",
+  "url": "https://mindyourprompt.github.io",
+  "author": "Mind Your Prompt Team",
+  "email": "hello@mindyourprompt.com",
+  "social": {
+    "twitter": "@mindyourprompt",
+    "linkedin": "company/mind-your-prompt",
+    "github": "mindyourprompt"
+  },
+  "navigation": [
+    {
+      "text": "Home",
+      "url": "/"
+    },
+    {
+      "text": "Articles", 
+      "url": "/articles/"
+    },
+    {
+      "text": "About",
+      "url": "/about/"
+    }
+  ]
+}

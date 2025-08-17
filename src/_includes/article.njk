@@ -1,0 +1,111 @@
+---
+layout: base.njk
+---
+
+<article>
+  <!-- Article Header -->
+  <header class="article-header">
+    <h1>{{ title }}</h1>
+    
+    <div class="article-meta">
+      <time>{{ date | dateFormat }}</time>
+      {% if readTime !== false %}
+        <span aria-hidden="true"> · </span>
+        <span>{{ content | readTime }}</span>
+      {% endif %}
+      {% if author %}
+        <span aria-hidden="true"> · </span>
+        <span>By {{ author }}</span>
+      {% endif %}
+    </div>
+    
+    {% if description %}
+    <p class="article-description" style="font-size: 1.2em; color: var(--text-muted); margin: var(--space-lg) 0;">
+      {{ description }}
+    </p>
+    {% endif %}
+    
+    {% if tags and tags.length %}
+    <div class="tags">
+      {% for tag in tags %}
+        {% if tag != "post" %}
+        <a href="/tags/{{ tag | slug }}/" class="tag">{{ tag }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </header>
+
+  <!-- Article Content -->
+  <div class="article-content">
+    {{ content | safe }}
+  </div>
+
+  <!-- Article Footer -->
+  <footer class="article-footer" style="margin-top: var(--space-3xl); padding-top: var(--space-xl); border-top: 1px solid var(--border);">
+    
+    <!-- Call to Action -->
+    <div class="article-cta" style="background-color: var(--surface); padding: var(--space-xl); border-radius: 12px; text-align: center; margin-bottom: var(--space-xl);">
+      <h3 style="margin-top: 0; color: var(--h3-color);">Ready to Master Prompt Engineering?</h3>
+      <p style="color: var(--text-muted); margin-bottom: var(--space-lg);">
+        Join thousands of professionals learning to communicate effectively with AI. Get expert insights, practical techniques, and immediate feedback.
+      </p>
+      <a href="/about/" class="btn btn-accent">Learn More About Our Platform</a>
+    </div>
+
+    <!-- Social Share (placeholder) -->
+    <div class="social-share" style="text-align: center; margin-bottom: var(--space-xl);">
+      <p style="color: var(--text-muted); margin-bottom: var(--space-md);">Share this article:</p>
+      <div style="display: flex; justify-content: center; gap: var(--space-md);">
+        <a href="https://twitter.com/intent/tweet?text={{ title }}&url={{ site.url }}{{ page.url }}" target="_blank" class="btn btn-outline" style="font-size: 0.9rem; padding: var(--space-sm) var(--space-md);">Twitter</a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ page.url }}" target="_blank" class="btn btn-outline" style="font-size: 0.9rem; padding: var(--space-sm) var(--space-md);">LinkedIn</a>
+      </div>
+    </div>
+
+    <!-- Author Bio (if provided) -->
+    {% if authorBio %}
+    <div class="author-bio" style="background-color: var(--surface); padding: var(--space-xl); border-radius: 12px; margin-bottom: var(--space-xl);">
+      <h4 style="margin-top: 0;">About the Author</h4>
+      <p style="color: var(--text-muted);">{{ authorBio }}</p>
+    </div>
+    {% endif %}
+
+    <!-- Newsletter Signup -->
+    <div class="newsletter-signup" style="background-color: var(--surface); padding: var(--space-xl); border-radius: 12px; border-left: 4px solid var(--accent-fill);">
+      <h4 style="margin-top: 0; color: var(--h3-color);">Stay Updated</h4>
+      <p style="color: var(--text-muted); margin-bottom: var(--space-lg);">
+        Get weekly insights on prompt engineering, AI communication strategies, and platform updates delivered to your inbox.
+      </p>
+      <!-- Newsletter form placeholder - integrate with your email service -->
+      <form action="#" method="post" style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
+        <input type="email" placeholder="Enter your email" required style="flex: 1; min-width: 250px; padding: var(--space-md); border: 1px solid var(--border); border-radius: 6px; font-size: 1rem;">
+        <button type="submit" class="btn btn-accent">Subscribe</button>
+      </form>
+    </div>
+  </footer>
+</article>
+
+<!-- Related Posts (other posts for now) -->
+{% if collections.posts.length > 1 %}
+<section class="related-posts" style="margin-top: var(--space-3xl);">
+  <h2>More Articles</h2>
+  <div class="post-grid">
+    {% for post in collections.posts | slice(0, 3) %}
+      {% if post.url != page.url %}
+      <article class="post-card">
+        <h3><a href="{{ post.url }}" style="text-decoration: none; color: var(--h3-color);">{{ post.data.title }}</a></h3>
+        <div class="article-meta">
+          <time>{{ post.date | dateFormat }}</time>
+          <span aria-hidden="true"> · </span>
+          <span>{{ post.templateContent | readTime }}</span>
+        </div>
+        {% if post.data.description %}
+        <p class="post-excerpt">{{ post.data.description }}</p>
+        {% endif %}
+        <a href="{{ post.url }}" class="btn btn-outline" style="font-size: 0.9rem;">Read More</a>
+      </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}

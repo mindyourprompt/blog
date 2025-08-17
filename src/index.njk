@@ -1,0 +1,152 @@
+---
+layout: base.njk
+title: Home
+description: "Transform prompt engineering from trial-and-error practice into a structured, engaging learning journey. Master the art of AI communication with expert insights and practical techniques."
+wide: true
+---
+
+<!-- Hero Section -->
+<section class="hero">
+  <h1 class="hero-title">{{ site.name }}</h1>
+  <p class="hero-subtitle">{{ site.tagline }}</p>
+  <p style="font-size: 1.1rem; color: var(--text-muted); max-width: 65ch; margin: 0 auto var(--space-2xl) auto;">
+    {{ site.description }}
+  </p>
+  <div style="display: flex; gap: var(--space-lg); justify-content: center; flex-wrap: wrap;">
+    <a href="/articles/" class="btn btn-accent">Explore Articles</a>
+    <a href="/about/" class="btn btn-outline">Learn About Our Mission</a>
+  </div>
+</section>
+
+<!-- Value Propositions -->
+<section style="margin: var(--space-3xl) 0;">
+  <div style="max-width: var(--content-width); margin: 0 auto;">
+    <h2 style="text-align: center; margin-bottom: var(--space-2xl);">Why Prompt Engineering Matters</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-xl);">
+      <div class="card" style="text-align: center;">
+        <div style="width: 60px; height: 60px; background-color: var(--accent-fill); border-radius: 50%; margin: 0 auto var(--space-lg) auto; display: flex; align-items: center; justify-content: center; font-size: 24px;">🎯</div>
+        <h3 style="margin-top: 0;">Precision & Efficiency</h3>
+        <p style="color: var(--text-muted);">
+          Master the art of crafting prompts that get you exactly what you need, every time. Reduce trial-and-error and maximize AI output quality.
+        </p>
+      </div>
+      
+      <div class="card" style="text-align: center;">
+        <div style="width: 60px; height: 60px; background-color: var(--accent-fill); border-radius: 50%; margin: 0 auto var(--space-lg) auto; display: flex; align-items: center; justify-content: center; font-size: 24px;">🚀</div>
+        <h3 style="margin-top: 0;">Competitive Advantage</h3>
+        <p style="color: var(--text-muted);">
+          In an AI-driven world, the ability to communicate effectively with artificial intelligence is becoming a critical professional skill.
+        </p>
+      </div>
+      
+      <div class="card" style="text-align: center;">
+        <div style="width: 60px; height: 60px; background-color: var(--accent-fill); border-radius: 50%; margin: 0 auto var(--space-lg) auto; display: flex; align-items: center; justify-content: center; font-size: 24px;">🧠</div>
+        <h3 style="margin-top: 0;">Structured Learning</h3>
+        <p style="color: var(--text-muted);">
+          Move beyond random experimentation. Learn proven methodologies, patterns, and best practices from industry experts.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Articles -->
+<section style="margin: var(--space-3xl) 0;">
+  <div style="max-width: var(--content-width); margin: 0 auto;">
+    <h2 style="text-align: center; margin-bottom: var(--space-2xl);">Latest Insights</h2>
+    
+    {% if collections.recentPosts.length > 0 %}
+    <div class="post-grid">
+      {% for post in collections.recentPosts %}
+      <article class="post-card">
+        <h3 style="margin-top: 0;">
+          <a href="{{ post.url }}" style="text-decoration: none; color: var(--h3-color);">
+            {{ post.data.title }}
+          </a>
+        </h3>
+        <div class="article-meta">
+          <time>{{ post.date | dateFormat }}</time>
+          <span aria-hidden="true"> · </span>
+          <span>{{ post.templateContent | readTime }}</span>
+        </div>
+        {% if post.data.description %}
+        <p class="post-excerpt">{{ post.data.description }}</p>
+        {% endif %}
+        {% if post.data.tags and post.data.tags.length %}
+        <div class="tags" style="margin-bottom: var(--space-lg);">
+          {% for tag in post.data.tags %}
+            {% if tag != "post" %}
+            <span class="tag">{{ tag }}</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
+        <a href="{{ post.url }}" class="btn btn-outline" style="font-size: 0.9rem;">Read Article</a>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <!-- Placeholder for when no posts exist yet -->
+    <div style="text-align: center; padding: var(--space-2xl); background-color: var(--surface); border-radius: 12px;">
+      <h3>Coming Soon</h3>
+      <p style="color: var(--text-muted);">We're preparing insightful articles on prompt engineering, AI communication strategies, and industry best practices. Check back soon!</p>
+    </div>
+    {% endif %}
+    
+    <div style="text-align: center; margin-top: var(--space-xl);">
+      <a href="/articles/" class="btn btn-outline">View All Articles</a>
+    </div>
+  </div>
+</section>
+
+<!-- Platform Preview -->
+<section style="margin: var(--space-3xl) 0; background-color: var(--surface); padding: var(--space-3xl) var(--space-lg); border-radius: 12px;">
+  <div style="max-width: var(--content-width); margin: 0 auto; text-align: center;">
+    <h2 style="margin-bottom: var(--space-lg);">The Future of AI Education</h2>
+    <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: var(--space-2xl); max-width: 60ch; margin-left: auto; margin-right: auto;">
+      We're building the only platform where AI teaches you AI. Get instant, personalized feedback on your prompts with clear paths to mastery.
+    </p>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-xl); margin-bottom: var(--space-2xl);">
+      <div>
+        <h4 style="color: var(--accent-fill); margin-bottom: var(--space-sm);">AI-Powered Mentorship</h4>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Real-time feedback and guidance from advanced language models</p>
+      </div>
+      <div>
+        <h4 style="color: var(--accent-fill); margin-bottom: var(--space-sm);">Structured Curriculum</h4>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Progressive learning paths from beginner to expert level</p>
+      </div>
+      <div>
+        <h4 style="color: var(--accent-fill); margin-bottom: var(--space-sm);">Practical Application</h4>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Hands-on exercises with immediate, actionable insights</p>
+      </div>
+    </div>
+    
+    <div style="background-color: var(--page-bg); padding: var(--space-xl); border-radius: 8px; border-left: 4px solid var(--accent-fill);">
+      <h4 style="margin-top: 0; color: var(--h3-color);">Join the Waitlist</h4>
+      <p style="color: var(--text-muted); margin-bottom: var(--space-lg);">
+        Be among the first to experience revolutionary AI-powered prompt engineering education. Get early access and exclusive content.
+      </p>
+      <!-- Email signup form - integrate with your email service -->
+      <form action="#" method="post" style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap; max-width: 400px; margin: 0 auto;">
+        <input type="email" placeholder="Enter your email" required style="flex: 1; min-width: 250px; padding: var(--space-md); border: 1px solid var(--border); border-radius: 6px; font-size: 1rem;">
+        <button type="submit" class="btn btn-accent">Join Waitlist</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section style="margin: var(--space-3xl) 0; text-align: center;">
+  <div style="max-width: var(--content-width); margin: 0 auto;">
+    <h2 style="margin-bottom: var(--space-lg);">Ready to Transform Your AI Communication?</h2>
+    <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: var(--space-2xl); max-width: 55ch; margin-left: auto; margin-right: auto;">
+      Whether you're a developer, content creator, researcher, or business professional, mastering prompt engineering will accelerate your work and unlock new possibilities.
+    </p>
+    <div style="display: flex; gap: var(--space-lg); justify-content: center; flex-wrap: wrap;">
+      <a href="/articles/" class="btn btn-accent">Start Learning Today</a>
+      <a href="/about/" class="btn btn-outline">Our Story & Mission</a>
+    </div>
+  </div>
+</section>

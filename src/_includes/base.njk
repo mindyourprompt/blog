@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title %}{{ title }} · {% endif %}{{ site.name }}</title>
+  
+  <!-- Meta Description -->
+  <meta name="description" content="{% if description %}{{ description }}{% else %}{{ site.description }}{% endif %}">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="{% if title %}{{ title }} · {{ site.name }}{% else %}{{ site.name }} · {{ site.tagline }}{% endif %}">
+  <meta property="og:description" content="{% if description %}{{ description }}{% else %}{{ site.description }}{% endif %}">
+  <meta property="og:type" content="{% if layout == 'article.njk' %}article{% else %}website{% endif %}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% if title %}{{ title }} · {{ site.name }}{% else %}{{ site.name }} · {{ site.tagline }}{% endif %}">
+  <meta name="twitter:description" content="{% if description %}{{ description }}{% else %}{{ site.description }}{% endif %}">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/_assets/main.css">
+  
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="{{ site.name }} RSS Feed" href="/feed.xml">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" href="/favicon.png">
+</head>
+<body>
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-content">
+      <a href="/" class="logo">{{ site.name }}</a>
+      
+      <nav aria-label="Main navigation">
+        <ul class="nav-menu">
+          {% for nav in site.navigation %}
+          <li>
+            <a href="{{ nav.url }}" class="nav-link{% if page.url == nav.url %} active{% endif %}">
+              {{ nav.text }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content{% if wide %} wide-content{% endif %}">
+    {{ content | safe }}
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>&copy; 2024 {{ site.author }}. All rights reserved.</p>
+      <p>
+        <a href="/feed.xml">RSS Feed</a> · 
+        <a href="https://twitter.com/{{ site.social.twitter }}">Twitter</a> · 
+        <a href="https://linkedin.com/{{ site.social.linkedin }}">LinkedIn</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Analytics (placeholder for future) -->
+  {% if site.analytics %}
+  <!-- Google Analytics or other analytics code -->
+  {% endif %}
+</body>
+</html>

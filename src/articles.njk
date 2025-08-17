@@ -1,0 +1,157 @@
+---
+layout: base.njk
+title: Articles
+description: "Explore our comprehensive collection of articles on prompt engineering, AI communication strategies, and best practices for professional AI interaction."
+permalink: /articles/
+---
+
+<div style="max-width: var(--content-width); margin: 0 auto;">
+  <!-- Page Header -->
+  <header style="margin-bottom: var(--space-3xl); text-align: center;">
+    <h1>Expert Insights on Prompt Engineering</h1>
+    <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 60ch; margin: var(--space-lg) auto 0;">
+      Discover proven strategies, advanced techniques, and industry best practices for mastering AI communication. Each article is crafted by experts to provide immediate value and actionable insights.
+    </p>
+  </header>
+
+  <!-- Featured Article (Latest Post) -->
+  {% if collections.posts.length > 0 %}
+  {% set featuredPost = collections.posts[0] %}
+  <section style="margin-bottom: var(--space-3xl);">
+    <h2 style="margin-bottom: var(--space-lg); text-align: center;">Featured Article</h2>
+    <article class="card" style="background: linear-gradient(135deg, var(--surface) 0%, var(--page-bg) 100%); border: 2px solid var(--accent-fill); position: relative;">
+      <div style="position: absolute; top: var(--space-md); right: var(--space-md); background-color: var(--accent-fill); color: var(--primary); padding: var(--space-xs) var(--space-md); border-radius: 20px; font-size: 0.8rem; font-weight: 500;">
+        Latest
+      </div>
+      
+      <h3 style="margin-top: 0; font-size: 2rem; line-height: 1.2;">
+        <a href="{{ featuredPost.url }}" style="text-decoration: none; color: var(--h3-color);">
+          {{ featuredPost.data.title }}
+        </a>
+      </h3>
+      
+      <div class="article-meta" style="margin-bottom: var(--space-lg);">
+        <time>{{ featuredPost.date | dateFormat }}</time>
+        <span aria-hidden="true"> · </span>
+        <span>{{ featuredPost.templateContent | readTime }}</span>
+        {% if featuredPost.data.author %}
+        <span aria-hidden="true"> · </span>
+        <span>By {{ featuredPost.data.author }}</span>
+        {% endif %}
+      </div>
+      
+      {% if featuredPost.data.description %}
+      <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: var(--space-lg); line-height: 1.6;">
+        {{ featuredPost.data.description }}
+      </p>
+      {% endif %}
+      
+      {% if featuredPost.data.tags and featuredPost.data.tags.length %}
+      <div class="tags" style="margin-bottom: var(--space-lg);">
+        {% for tag in featuredPost.data.tags %}
+          {% if tag != "post" %}
+          <span class="tag">{{ tag }}</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
+      
+      <a href="{{ featuredPost.url }}" class="btn btn-accent">Read Full Article</a>
+    </article>
+  </section>
+  {% endif %}
+
+  <!-- All Articles -->
+  <section>
+    <h2 style="margin-bottom: var(--space-xl); text-align: center;">All Articles</h2>
+    
+    {% if collections.posts.length > 1 %}
+    <div class="post-grid">
+      {% for post in collections.posts %}
+        {% if loop.index > 1 %}
+        <article class="post-card">
+          <h3 style="margin-top: 0;">
+            <a href="{{ post.url }}" style="text-decoration: none; color: var(--h3-color);">
+              {{ post.data.title }}
+            </a>
+          </h3>
+          
+          <div class="article-meta">
+            <time>{{ post.date | dateFormat }}</time>
+            <span aria-hidden="true"> · </span>
+            <span>{{ post.templateContent | readTime }}</span>
+            {% if post.data.author %}
+            <span aria-hidden="true"> · </span>
+            <span>By {{ post.data.author }}</span>
+            {% endif %}
+          </div>
+          
+          {% if post.data.description %}
+          <p class="post-excerpt">{{ post.data.description }}</p>
+          {% endif %}
+          
+          {% if post.data.tags and post.data.tags.length %}
+          <div class="tags" style="margin-bottom: var(--space-lg);">
+            {% for tag in post.data.tags %}
+              {% if tag != "post" %}
+              <span class="tag">{{ tag }}</span>
+              {% endif %}
+            {% endfor %}
+          </div>
+          {% endif %}
+          
+          <a href="{{ post.url }}" class="btn btn-outline" style="font-size: 0.9rem;">Read Article</a>
+        </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% elif collections.posts.length == 1 %}
+    <div style="text-align: center; padding: var(--space-2xl); background-color: var(--surface); border-radius: 12px;">
+      <h3>More Articles Coming Soon</h3>
+      <p style="color: var(--text-muted);">We're preparing more expert insights on prompt engineering and AI communication. Check back regularly for new content!</p>
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: var(--space-2xl); background-color: var(--surface); border-radius: 12px;">
+      <h3>Articles Coming Soon</h3>
+      <p style="color: var(--text-muted);">We're preparing insightful articles on prompt engineering, AI communication strategies, and industry best practices. Check back soon!</p>
+    </div>
+    {% endif %}
+  </section>
+
+  <!-- Categories/Topics (Future Enhancement) -->
+  <section style="margin-top: var(--space-3xl);">
+    <div style="background-color: var(--surface); padding: var(--space-xl); border-radius: 12px; text-align: center;">
+      <h3 style="margin-top: 0;">Topics We Cover</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-lg); margin-top: var(--space-lg);">
+        <div>
+          <h4 style="color: var(--accent-fill); margin-bottom: var(--space-sm);">Fundamentals</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Core principles and basic techniques</p>
+        </div>
+        <div>
+          <h4 style="color: var(--accent-fill); margin-bottom: var(--space-sm);">Advanced Techniques</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Complex patterns and expert strategies</p>
+        </div>
+        <div>
+          <h4 style="color: var(--accent-fill); margin-bottom: var(--space-sm);">Industry Applications</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Real-world use cases and case studies</p>
+        </div>
+        <div>
+          <h4 style="color: var(--accent-fill); margin-bottom: var(--space-sm);">Tools & Platforms</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Reviews and comparisons</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Signup -->
+  <section style="margin-top: var(--space-3xl); background-color: var(--surface); padding: var(--space-xl); border-radius: 12px; text-align: center; border-left: 4px solid var(--accent-fill);">
+    <h3 style="margin-top: 0;">Never Miss an Insight</h3>
+    <p style="color: var(--text-muted); margin-bottom: var(--space-lg);">
+      Get weekly articles on prompt engineering, AI communication strategies, and platform updates delivered directly to your inbox.
+    </p>
+    <form action="#" method="post" style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap; max-width: 400px; margin: 0 auto;">
+      <input type="email" placeholder="Enter your email" required style="flex: 1; min-width: 250px; padding: var(--space-md); border: 1px solid var(--border); border-radius: 6px; font-size: 1rem;">
+      <button type="submit" class="btn btn-accent">Subscribe</button>
+    </form>
+  </section>
+</div>

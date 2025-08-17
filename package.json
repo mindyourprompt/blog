@@ -1,0 +1,28 @@
+{
+  "name": "mind-your-prompt-blog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npx @11ty/eleventy --serve\" \"npm:css:watch\"",
+    "build": "npm run css:build && npx @11ty/eleventy",
+    "css:build": "postcss src/_assets/css/main.css -o _site/_assets/main.css",
+    "css:watch": "postcss -w src/_assets/css/main.css -o _site/_assets/main.css",
+    "clean": "rm -rf _site"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "Static blog for Mind Your Prompt - thought leadership in prompt engineering",
+  "type": "module",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "@11ty/eleventy-plugin-rss": "^2.0.4",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
+    "concurrently": "^9.2.0",
+    "cssnano": "^7.1.0",
+    "markdown-it": "^14.1.0",
+    "markdown-it-attrs": "^4.3.1",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1"
+  }
+}
